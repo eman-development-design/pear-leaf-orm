@@ -1,0 +1,54 @@
+{
+  "name": "eman-development-design/pear-leaf-orm",
+  "description": "A lightweight ORM-ish library to make writing MongoDB apps easier.",
+  "keywords": ["orm", "mongodb", "mongo", "model"],
+  "homepage": "https://edlomonaco.dev",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ed Lomonaco",
+      "email": "emandevelopmentdesign@gmail.com",
+      "role": "developer"
+    }
+  ],
+  "version": "2.0.0",
+  "require": {
+    "php": "^8.2",
+    "ext-json": "*",
+    "ext-mongodb": "^1.20",
+    "mongodb/mongodb": "^1.20.0"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^v3.65.0",
+    "phpstan/phpstan": "^2.0.2",
+    "pestphp/pest": "^v3.5.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Edd\\PearLeafOrm\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "replace": {
+    "symfony/polyfill-php80": "*",
+    "symfony/polyfill-php81": "*"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  },
+  "scripts": {
+    "lint:validate": "php-cs-fixer fix --dry-run --diff",
+    "lint:fix": "php-cs-fixer fix",
+    "quality:analysis": "phpstan analyse --no-progress --ansi --configuration=phpstan.neon --memory-limit 512M",
+    "quality:profiler": "pest --profile",
+    "test:coverage": "pest --coverage",
+    "test:unit": "pest"
+  }
+}
