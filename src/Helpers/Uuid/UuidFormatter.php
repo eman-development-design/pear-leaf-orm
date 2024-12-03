@@ -1,6 +1,6 @@
 <?php
 
-namespace Edd\PearLeafOrm\Uuid;
+namespace Edd\PearLeafOrm\Helpers\Uuid;
 
 /**
  * Formatter for language-based UUIDs.

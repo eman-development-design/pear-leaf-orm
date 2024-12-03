@@ -1,12 +1,12 @@
 <?php
 
-namespace Edd\PearLeafOrm;
+namespace Edd\PearLeafOrm\Helpers;
 
 use DateTime;
 use DateTimeImmutable;
 use MongoDB\BSON\ObjectId as MongoObjectId;
 
-class ObjectId
+class ObjectIdHelper
 {
     public static function getData(MongoObjectId $objectId): string
     {
@@ -15,11 +15,11 @@ class ObjectId
 
     public static function getAsDateTime(MongoObjectId $objectId): DateTime
     {
-        return (new DateTime)->setTimestamp($objectId->getTimestamp());
+        return (new DateTime())->setTimestamp($objectId->getTimestamp());
     }
 
     public static function getAsDateTimeImmutable(MongoObjectId $objectId): DateTimeImmutable
     {
-        return (new DateTimeImmutable)->setTimestamp($objectId->getTimestamp());
+        return (new DateTimeImmutable())->setTimestamp($objectId->getTimestamp());
     }
 }

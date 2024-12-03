@@ -1,13 +1,13 @@
 <?php
 
-namespace Edd\PearLeafOrm;
+namespace Edd\PearLeafOrm\Helpers;
 
 use JsonException;
+use MongoDB\BSON\Document;
 use MongoDB\Model\BSONArray;
-use function MongoDB\BSON\fromPHP;
-use function MongoDB\BSON\toJSON;
 
-class Arr
+
+class ArrayHelper
 {
     /**
      * @param \MongoDB\Model\BSONArray $array
@@ -17,6 +17,6 @@ class Arr
      */
     public static function toArray(BSONArray $array): array
     {
-        return json_decode(toJSON(fromPHP($array)), true, 512, JSON_THROW_ON_ERROR);
+        return json_decode(Document::fromPHP($array)->toCanonicalExtendedJSON(), true, 512, JSON_THROW_ON_ERROR);
     }
 }

@@ -2,10 +2,10 @@
 
 namespace Tests\Entities;
 
-use Edd\MongoDbHelpers\Attributes\BinaryField;
-use Edd\MongoDbHelpers\Attributes\Document;
-use Edd\MongoDbHelpers\Attributes\Field;
-use Edd\MongoDbHelpers\Constants\BinaryDataType;
+use Edd\PearLeafOrm\Attributes\BinaryField;
+use Edd\PearLeafOrm\Attributes\Document;
+use Edd\PearLeafOrm\Attributes\Field;
+use Edd\PearLeafOrm\Constants\BinaryDataType;
 
 #[Document('Demo')]
 class User

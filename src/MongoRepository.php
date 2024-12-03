@@ -32,7 +32,7 @@ abstract class MongoRepository
      * Get instance of MongoDB\Collection
      * @return \MongoDB\Collection
      */
-    protected function GetCollection() : Collection
+    protected function GetCollection(): Collection
     {
         return $this->collection;
     }

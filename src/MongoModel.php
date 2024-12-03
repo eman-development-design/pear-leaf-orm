@@ -5,6 +5,7 @@ namespace Edd\PearLeafOrm;
 use Edd\PearLeafOrm\Attributes\BinaryField;
 use Edd\PearLeafOrm\Attributes\Document;
 use Edd\PearLeafOrm\Attributes\Field;
+use MongoDB\BSON\ObjectId;
 use MongoDB\BSON\Persistable;
 use MongoDB\Collection;
 use ReflectionClass;
@@ -12,12 +13,10 @@ use WeakMap;
 
 /**
  * An ODM-like Model.
- *
- * @since 2.0.0
  */
 abstract class MongoModel implements Persistable
 {
-    protected \MongoDB\BSON\ObjectId $id;
+    protected ObjectId $id;
 
     protected Collection $collection;
 
@@ -50,17 +49,22 @@ abstract class MongoModel implements Persistable
      *
      * @return array<mixed>
      */
-    public function bsonSerialize(): array {
+    public function bsonSerialize()
+    : array
+    {
         return $this->fields;
     }
 
     /**
      * @param array<mixed> $data
-     * @see https://www.php.net/manual/en/mongodb-bson-unserializable.bsonunserialize.php
      *
      * @return void
+     * @see https://www.php.net/manual/en/mongodb-bson-unserializable.bsonunserialize.php
+     *
      */
-    public function bsonUnserialize(array $data): void {
+    public function bsonUnserialize(array $data)
+    : void
+    {
         // TODO
     }
 
@@ -69,7 +73,8 @@ abstract class MongoModel implements Persistable
      *
      * @return array<mixed>
      */
-    public function toArray(): array
+    public function toArray()
+    : array
     {
         return [];
     }
@@ -79,7 +84,8 @@ abstract class MongoModel implements Persistable
      *
      * @return void
      */
-    public function create() : void
+    public function create()
+    : void
     {
         $this->collection->insertOne($this);
     }
@@ -89,12 +95,14 @@ abstract class MongoModel implements Persistable
      *
      * @return void
      */
-    private function setCollection(): void
+    private function setCollection()
+    : void
     {
         $this->collection = $this->connectionManager->mongo->selectCollection($this->databaseName, $this->collectionName);
     }
 
-    private function getPropertyAttributes(): void
+    private function getPropertyAttributes()
+    : void
     {
         foreach ($this->reflector->getProperties() as $property) {
             foreach ($property->getAttributes() as $attribute) {
@@ -103,10 +111,7 @@ abstract class MongoModel implements Persistable
                 if ($attribute->getName() !== Field::class) {
                     $fieldName = $attrVals[1] ?? $property->getName();
 
-                    $this->fieldMap[$fieldName] = [
-                        'fieldType' => $attrVals[0],
-                        'fieldValue' => $property->getValue(),
-                    ];
+                    $this->fieldMap[$fieldName] = ['fieldType' => $attrVals[0], 'fieldValue' => $property->getValue(),];
                 }
 
                 if ($attribute->getName() !== BinaryField::class) {
@@ -122,7 +127,8 @@ abstract class MongoModel implements Persistable
      *
      * @return void
      */
-    private function getAttributeValues(): void
+    private function getAttributeValues()
+    : void
     {
         foreach ($this->reflector->getAttributes() as $attribute) {
             if ($attribute->getName() !== Document::class) {

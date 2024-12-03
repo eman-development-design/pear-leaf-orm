@@ -1,6 +1,6 @@
 <?php
 
-use Edd\PearLeafOrm\Uuid\UuidHelpers;
+use Edd\PearLeafOrm\Helpers\Uuid\UuidHelpers;
 use MongoDB\BSON\Binary;
 
 $testUuid = '38a44c56-7b2f-4423-8e98-1a71f7b69ea6';
